@@ -31,26 +31,21 @@ $("#submit").on("click", function () {
 
 database.ref().on("child_added", function(snapshot) {
 
+
+//append information to our current train schedule
 	var theChild = snapshot.val();
-	var monthsWorked = "";
-	var totalBilled = "";
+	var nextArrival = "";
+	// next arrival will be calculated by looping. We will add the frequency to the the first train time as many times as it takes to pass the current time in life.
+	var minutesAway = "";
+	// minutesAway will be calculated by subtracting the current time from the next arrival time.
 	console.log(theChild.name);
 	console.log(theChild.destination);
 	console.log(theChild.time);
 	console.log(theChild.frequency);
 	console.log(theChild.dateAdded);
 	console.log(moment().format('MM'));
-	$("#employeeData").append('<tr><td>' + theChild.name + '</td><td>' + theChild.destination + '</td><td>' + theChild.time + '</td><td>' + monthsWorked + '</td><td>' + theChild.frequency +  '</td><td>' + totalBilled + '</td></tr>');
+	$("#trainData").append('<tr><td>' + theChild.name + '</td><td>' + theChild.destination + '</td><td>' + theChild.frequency + '</td><td>' + theChild.time + '</td><td>' +  minutesAway + '</td></tr>');
 
 
 
 });
-	// var employeeCount = 0;
-	// var newRow = $("<tr>");
-	// $("<tr>").addId("tableRow" + employeeCount);
-	// // newRow.attr.("employeeData", employeeCount);
-	// $("#tableRow" + employeeCount).append('<td class = "name">' + name + '</td>');
-	// $(".name").append(newRow);
-	// $(".destination").append(newRow);
-	// $(".time").append(newRow);
-	// $(".frequency").append(newRow);
